@@ -3,7 +3,7 @@
  * Plugin Name: Wyuka Cemetery Manager
  * Plugin URI: https://sharifu.com
  * Description: Lot Manager for Wyuka: burial records, reports, import and export, and the public grave locator.
- * Version: 2.0.0
+ * Version: 3.0.0
  * Requires PHP: 7.4
  * Requires at least: 6.0
  * Author: MD Sharif
@@ -30,7 +30,7 @@
  */
 if (!defined('ABSPATH')) exit; // no direct access
 
-define('MCCM_VERSION', '2.0.0');
+define('MCCM_VERSION', '3.0.0');
 define('MCCM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('MCCM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('MCCM_AUTHOR_NAME', 'Sharif'); // shown on printed reports
