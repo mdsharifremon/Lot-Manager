@@ -1,0 +1,58 @@
+/* ---- Grave search: form + result cards ---- */
+.mccm-search{max-width:640px;margin:0 auto 4px;padding:0;text-align:center}
+.mccm-search h2{margin:0 0 4px;padding:0;font-size:40px;font-weight:700;line-height:1.15;color:#8bbabb!important}
+.mccm-search p{margin:0 0 14px;padding:0;color:#6b6b66;font-size:14px}
+.mccm-search form{display:flex;align-items:stretch;height:50px;margin:0;padding:0}
+.mccm-search input[type=text],.mccm-search input[type=submit]{box-sizing:border-box;height:100%;margin:0;border:2px solid #8bbabb;font-size:16px;line-height:1}
+.mccm-search input[type=text]{flex:1;min-width:0;padding:0 16px;border-right:0;border-radius:4px 0 0 4px;background:transparent;color:#2f4f4b}
+.mccm-search input[type=submit]{padding:0 28px;border-radius:0 4px 4px 0;background:#8bbabb;color:#fff;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.mccm-search input[type=submit]:hover{background:#6fa5a6;border-color:#6fa5a6}
+.mccm-count{text-align:center;color:#555;margin:14px 0 16px;padding:0;font-size:15px}
+.mccm-count b{color:#2f4f4b}
+.mccm-count .mccm-term{color:#8bbabb}
+.mccm-none{text-align:center;color:#555;padding:24px 0;font-size:17px;line-height:1.5}
+.mccm-none p{margin:0 0 4px;padding:0}
+.mccm-none b{color:#8bbabb;}
+.mccm-none i{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;margin-bottom:12px;border-radius:50%;background:#eef4f3;color:#3f8a84}
+.mccm-results{container-type:inline-size}
+.mccm-grid{display:grid;gap:25px;grid-template-columns:1fr}
+@container (min-width:560px){.mccm-grid{grid-template-columns:repeat(2,1fr)}}
+@container (min-width:840px){.mccm-grid{grid-template-columns:repeat(3,1fr)}}
+@container (min-width:1100px){.mccm-grid{grid-template-columns:repeat(4,1fr)}}
+.mccm-card{display:flex;flex-direction:column;border:1px solid #e2e4de;border-radius:8px;padding:18px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.mccm-card h3{margin:0 0 20px;padding:0;font-size:22px;font-weight:700;line-height:1.25;color:#2f6b64}
+.mccm-card h3 small{display:block;font-size:13px;font-weight:400;color:#777}
+.mccm-chips{display:flex;gap:6px;margin-bottom:12px}
+.mccm-chips span{flex:1;padding:6px 4px;border-radius:4px;background:#eef4f3;text-align:center;font-size:12px;line-height:1.2;color:#5b7f7b}
+.mccm-chips b{display:block;font-size:16px;color:#2f4f4b}
+.mccm-dates{list-style:none;margin:0 0 14px; padding: 0 0 0 0;font-size:14px}
+.entry-content ul.mccm-dates{list-style:none;margin:0 0 14px; padding: 0 0 0 0;font-size:14px}
+.mccm-dates li{display:flex;align-items:center;gap:10px;margin:0;padding:4px 0}
+.mccm-dates i{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:#eef4f3; color:#3f8a84;}
+.mccm-dates span{color:#777}
+.mccm-dates b{margin-left:auto;font-weight:600;color:#333;text-align:right}
+.mccm-dates b.mccm-cem{padding:0 15px;border-radius:999px;background:#e3efed;color:#2f6b64;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.mccm-dates b.mccm-cem-fairview{background:#fbeed8;color:#8a5a12}
+.mccm-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: auto;
+    padding: 12px 12px;
+    border: 2px solid #8bbabb;
+    border-radius: 4px;
+    color: #3f726c;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.mccm-btn:hover{background:#8bbabb;color:#fff}
+.mccm-pager{display:flex;justify-content:center;align-items:center;gap:16px;font-size: 18px; margin-top:24px;color:#555}
+.mccm-pager form{margin:0}
+.mccm-pbtn{display:inline-block;padding:8px 20px;border:2px solid #8bbabb;line-height: 1.5; border-radius:4px;background:#fff;color:#3f726c;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.mccm-pbtn:hover{background:#8bbabb;color:#fff}
+.mccm-pbtn.is-off{opacity:.4;cursor:default;pointer-events:none}

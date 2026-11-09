@@ -1,0 +1,415 @@
+/* Wyuka Lot Manager - ADMIN stylesheet. Loaded only on the Lot Manager dashboard screens.
+   Sections: 2 colour tokens  3 add/edit form  4 list + details panel */
+
+/* ===== 2. colour tokens ===== */
+/* Wyuka Lot Manager - colour tokens. The ONLY place colours are set for the form and the list.
+   Change the six base colours below (the site's own palette) and everything else follows. */
+body.mccm-form-page, body.mccm-list-page, .mccm-ui, .mccm-list-ui, .mccm-pop {
+  /* base colours */
+  --mccm-brand:  #C9E7D7;   /* site background mint: buttons, highlights */
+  --mccm-accent: #70A7A8;   /* teal: headings, focus, hover */
+  --mccm-ink:    #404244;   /* text */
+  --mccm-page:   #E2E4DD;   /* page background */
+  --mccm-error:  #B3261E;
+  --mccm-ok:     #98C838;
+  /* everything below is derived */
+  --ink: var(--mccm-ink);
+  --ink-2: color-mix(in srgb, var(--mccm-ink) 74%, transparent);
+  --ink-3: color-mix(in srgb, var(--mccm-ink) 56%, transparent);
+  --line: color-mix(in srgb, var(--mccm-ink) 18%, #fff);
+  --line-2: color-mix(in srgb, var(--mccm-ink) 10%, #fff);
+  --field-line: color-mix(in srgb, var(--mccm-ink) 30%, #fff);
+  --teal: color-mix(in srgb, var(--mccm-accent) 80%, #fff);
+  --teal-deep: var(--mccm-accent);
+  --link: color-mix(in srgb, var(--mccm-accent) 60%, #000);
+  --mint: var(--mccm-brand);
+  --sage: var(--mccm-page);
+  --err: var(--mccm-error);
+  --err-bg: color-mix(in srgb, var(--mccm-error) 8%, #fff);
+  --err-line: color-mix(in srgb, var(--mccm-error) 30%, #fff);
+  --leaf: var(--mccm-ok);
+  --ring: color-mix(in srgb, var(--teal) 40%, transparent);
+  --stripe: color-mix(in srgb, var(--mccm-page) 45%, #fff);
+  --row-hover: color-mix(in srgb, var(--mccm-brand) 45%, transparent);
+  --btn-bg: var(--mccm-brand);
+  --btn-line: color-mix(in srgb, var(--mccm-brand) 82%, #000);
+  --btn-hover: #c6f7cd;
+  --shadow: color-mix(in srgb, var(--mccm-ink) 35%, transparent);
+  --r-field: 4px; --r-card: 8px;
+}
+
+/* WordPress adds a blue box-shadow + outline to every focused link/button, including after a mouse click.
+   Remove it on our screens; keyboard users still get one thin outline (:focus-visible). */
+:is(.mccm-ui, .mccm-list-ui, .mccm-pop) :is(a, button, .button, summary):focus { box-shadow: none; outline: none; }
+:is(.mccm-ui, .mccm-list-ui, .mccm-pop) :is(a, button, .button, summary):focus-visible { box-shadow: none; outline: 2px solid var(--teal-deep); outline-offset: 2px; }
+:is(.mccm-ui, .mccm-list-ui, .mccm-pop) :is(a, button, .button, summary):focus:not(:focus-visible) { box-shadow: none; outline: none; }
+
+/* ===== 3. add / edit form ===== */
+/* Wyuka Lot Manager - add/edit form. Scoped to .mccm-ui so nothing else in wp-admin changes.
+   Fonts are the site's own (Divi: headings Lora, body Lato), self-hosted from ./fonts so no request leaves the server.
+   Colours come from mccm-tokens.css. */
+@font-face { font-family: "Lato"; font-weight: 400; font-style: normal; font-display: swap; src: url("../../fonts/Lato-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Lato"; font-weight: 700; font-style: normal; font-display: swap; src: url("../../fonts/Lato-Bold.woff2") format("woff2"); }
+@font-face { font-family: "Lora"; font-weight: 400 700; font-style: normal; font-display: swap; src: url("../../fonts/Lora.woff2") format("woff2"); }
+
+body.mccm-form-page #wpcontent { background: var(--mccm-page); }
+body.mccm-form-page #wpfooter { display: none; }
+
+.mccm-ui {
+  --f-body: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --f-head: "Lora", Georgia, "Times New Roman", serif;
+  max-width: 1200px; margin: 0 auto; padding: 8px 20px 110px;
+  color: var(--ink); font-family: var(--f-body); font-size: 14px; line-height: 1.45;
+}
+.mccm-ui *, .mccm-ui *::before, .mccm-ui *::after { box-sizing: border-box; }
+
+/* breadcrumb: the link back is bold and dark, the current page is lighter plain text */
+.mccm-crumbs { margin: 22px 0 8px; font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.mccm-crumbs a { color: var(--link); font-weight: 800; text-decoration: none; border-bottom: 1px solid transparent; }
+.mccm-crumbs a:hover { color: var(--ink); border-color: var(--teal-deep); }
+.mccm-crumbs a:focus-visible { outline: 2px solid var(--teal-deep); outline-offset: 2px; }
+.mccm-crumbs span { margin: 0 4px; }
+.mccm-ui .mccm-title { font-family: var(--f-head); font-weight: 700; font-size: 46px; line-height: 1.1; color: var(--teal-deep); margin: 0 0 8px; padding: 0; letter-spacing: -.005em; }
+.mccm-sub { margin: 0 0 18px; color: var(--ink-2); font-size: 15px; }
+
+/* jump chips (sticky under the WP admin bar) */
+.mccm-chips { position: sticky; top: 32px; z-index: 20; display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 0 12px; margin: 0 0 14px; background: linear-gradient(var(--sage) 82%, color-mix(in srgb, var(--sage) 0%, transparent)); }
+.mccm-chips a { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: var(--r-field); background: rgba(255,255,255,.7); border: 1px solid var(--line); color: var(--ink); font-size: 13px; text-decoration: none; transition: background .15s, border-color .15s; }
+.mccm-chips a span { font-size: 11px; color: var(--teal-deep); font-weight: 700; }
+.mccm-chips a:hover { background: #fff; border-color: var(--teal); color: var(--ink); }
+.mccm-chips a:focus, .mccm-chips a:visited {     box-shadow: none; outline: 0;}
+.mccm-chips a:focus-visible { outline: 2px solid var(--teal-deep); outline-offset: 2px; }
+.mccm-chips a.is-active { background: var(--mint); border-color: var(--teal); font-weight: 700; }
+
+/* cards float on the sage page */
+.mccm-card { background: #fff; border: 1px solid var(--line-2); border-radius: var(--r-card); box-shadow: 0 1px 2px color-mix(in srgb, var(--mccm-ink) 5%, transparent), 0 8px 24px -12px color-mix(in srgb, var(--mccm-ink) 16%, transparent); margin: 0 0 22px; scroll-margin-top: 96px; }
+.mccm-card-head { display: flex; align-items: center; gap: 16px; padding: 20px 26px; border-bottom: 1px solid var(--line-2); }
+.mccm-card-ico { display: inline-flex; width: 52px; height: 52px; border-radius: var(--r-field); background: var(--mint); color: var(--ink); align-items: center; justify-content: center; flex: none; }
+.mccm-card-ico .mccm-ico { width: 28px; height: 28px; }
+.mccm-ui .mccm-card-head h2 { margin: 0; padding: 0; font-family: var(--f-head); font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.mccm-card-head p { margin: 3px 0 0; color: var(--ink-2); font-size: 13.5px; }
+.mccm-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 22px; padding: 24px 26px 28px; align-items: start; }
+
+/* fields */
+.mccm-field { min-width: 0; }
+.mccm-label-row { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 6px; }
+.mccm-label-row label { font-weight: 700; font-size: 13px; color: var(--ink); }
+.mccm-req { color: var(--err); font-weight: 700; }
+
+.mccm-ui input[type=text], .mccm-ui input[type=date], .mccm-ui input[type=number], .mccm-ui select {
+  display: block; width: 100%; max-width: none; height: 44px; min-height: 44px; padding: 0 12px; margin: 0;
+  border: 1px solid var(--field-line); border-radius: var(--r-field); background-color: #fff; color: var(--ink);
+  font-size: 14.5px; font-family: var(--f-body); box-shadow: none; line-height: normal;
+  transition: border-color .15s, box-shadow .15s;
+}
+/* our own arrow, vertically centred, same on every browser */
+.mccm-ui select {
+  -webkit-appearance: none; -moz-appearance: none; appearance: none; cursor: pointer; padding-right: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23404244' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; background-size: 16px 16px;
+}
+.mccm-ui select:has(option[value=""]:checked) { color: var(--ink-3); }
+.mccm-ui select option { color: var(--ink); }
+.mccm-ui input::placeholder { color: var(--ink-3); opacity: 1; }
+.mccm-ui input:hover, .mccm-ui select:hover { border-color: var(--teal-deep); }
+.mccm-ui input:focus, .mccm-ui select:focus { outline: none; border-color: var(--teal-deep); box-shadow: 0 0 0 3px var(--ring); }
+/* "Other" text box sits below its dropdown with a clear gap */
+.mccm-ui input.mccm-other[type=text] { margin-top: 10px; background-color: color-mix(in srgb, var(--mccm-brand) 25%, #fff); border-color: var(--teal); }
+.mccm-ui input.mccm-other[hidden], .mccm-err[hidden] { display: none; }
+.mccm-hint { margin: 6px 0 0; font-size: 14px; color: var(--ink-3); }
+.mccm-err { margin: 6px 0 0; font-size: 14px; color: var(--err); font-weight: 700; }
+.mccm-field.has-error input, .mccm-field.has-error select { border-color: var(--err); background-color: var(--err-bg); }
+.mccm-field.has-error input:focus, .mccm-field.has-error select:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--err) 18%, transparent); }
+
+/* error summary */
+.mccm-summary { background: var(--err-bg); border: 1px solid var(--err-line); border-left: 4px solid var(--err); color: var(--ink); border-radius: var(--r-field); padding: 12px 16px; margin: 0 0 14px; }
+.mccm-summary ul { margin: 6px 0 0 18px; list-style: disc; }
+.mccm-summary a { color: var(--ink); text-decoration: underline; }
+
+/* sticky action bar */
+.mccm-bar { position: sticky; bottom: 14px; z-index: 30; margin: 0; padding: 0; }
+.mccm-bar-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: 0 8px 28px -10px color-mix(in srgb, var(--mccm-ink) 35%, transparent); }
+.mccm-status { color: var(--ink-2); font-size: 13px; }
+.mccm-status.is-dirty::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--teal-deep); margin-right: 8px; }
+.mccm-bar-btns { display: flex; gap: 10px; }
+/* buttons: same height, radius and border style as the fields */
+.mccm-ui .mccm-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; min-height: 44px; padding: 0 24px; margin: 0; border: 1px solid transparent; border-radius: var(--r-field); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; cursor: pointer; font-family: var(--f-body); line-height: 1; transition: background .15s, border-color .15s; }
+.mccm-ui .mccm-btn-main, .mccm-ui .mccm-btn-soft { background: var(--btn-bg); border-color: var(--btn-line); color: var(--ink); }
+.mccm-ui .mccm-btn-main:hover, .mccm-ui .mccm-btn-soft:hover { background: var(--btn-hover); border-color: var(--teal-deep); color: var(--ink); }
+.mccm-ui .mccm-btn:focus-visible { outline: 2px solid var(--teal-deep); outline-offset: 2px; }
+.mccm-ui .mccm-btn[disabled] { opacity: .65; cursor: progress; }
+.mccm-btn .mccm-ico { width: 18px; height: 18px; }
+
+/* list page success banner */
+.mccm-flash { border-left-color: var(--leaf) !important; }
+
+@media (max-width: 900px) { .mccm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mccm-ui .mccm-title { font-size: 38px; } }
+@media (max-width: 782px) { .mccm-chips { top: 46px; } }
+@media (max-width: 560px) {
+  .mccm-ui .mccm-title { font-size: 32px; }
+  .mccm-grid { grid-template-columns: 1fr; padding: 18px 16px 22px; }
+  .mccm-card-head { padding: 16px; } .mccm-card-ico { width: 44px; height: 44px; }
+  .mccm-bar-in { flex-direction: column; align-items: stretch; gap: 10px; }
+  .mccm-bar-btns .mccm-btn { flex: 1; }
+}
+
+/* combobox: type to filter, or click the arrow / a row to pick. Same arrow as the dropdowns. */
+.mccm-combo { position: relative; }
+.mccm-ui .mccm-combo input[type=text] { padding-right: 40px; }
+.mccm-combo-btn { position: absolute; top: 0; right: 0; width: 40px; height: 44px; padding: 0; margin: 0; border: 0; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23404244' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat center / 16px 16px; cursor: pointer; border-radius: 0 var(--r-field) var(--r-field) 0; }
+.mccm-combo-list { position: absolute; z-index: 60; top: 48px; left: 0; right: 0; max-height: 260px; overflow-y: auto; margin: 0; padding: 4px; list-style: none; background: #fff; border: 1px solid var(--teal-deep); border-radius: var(--r-field); box-shadow: 0 12px 28px -8px color-mix(in srgb, var(--mccm-ink) 35%, transparent); }
+.mccm-combo-list[hidden] { display: none; }
+.mccm-combo-list li { margin: 0; padding: 9px 10px; border-radius: 3px; font-size: 14px; color: var(--ink); cursor: pointer; }
+.mccm-combo-list li:hover, .mccm-combo-list li.is-active { background: var(--mint); }
+.mccm-combo-list li.mccm-combo-empty { color: var(--ink-3); cursor: default; font-size: 13px; }
+.mccm-combo-list li.mccm-combo-empty:hover { background: transparent; }
+
+/* date fields: same calendar icon everywhere (native picker still opens on click) */
+.mccm-ui input[type=date] { position: relative; padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23404244' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; background-size: 18px 18px; }
+.mccm-ui input[type=date]::-webkit-calendar-picker-indicator { position: absolute; inset: 0 0 0 auto; width: 44px; height: 100%; margin: 0; padding: 0; opacity: 0; cursor: pointer; }
+
+/* browser validation states: red only after the editor has touched the field or tried to save */
+.mccm-ui input:user-invalid, .mccm-ui select:user-invalid { border-color: var(--err); background-color: var(--err-bg); }
+.mccm-ui input:user-invalid:focus, .mccm-ui select:user-invalid:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--err) 18%, transparent); }
+
+/* age is a real number field; hide the little spinner arrows so it matches the other boxes */
+.mccm-ui input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+.mccm-ui input[type=number]::-webkit-outer-spin-button, .mccm-ui input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+html:has(body.mccm-form-page) { scroll-behavior: smooth; }
+.mccm-ui [data-section] { scroll-margin-top: 90px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ===== 4. list + details panel ===== */
+/* Wyuka Lot Manager - Lot Information list. Light skin over the standard WordPress list table.
+   Scoped to .mccm-list-ui / .mccm-pop so nothing else in wp-admin changes. Same fonts and colours as the add/edit form. */
+
+body.mccm-list-page #wpcontent { background: var(--mccm-page); }
+body.mccm-list-page #wpfooter { display: none; }
+
+.mccm-list-ui, .mccm-pop {
+  --f-body: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --f-head: "Lora", Georgia, "Times New Roman", serif;
+  font-family: var(--f-body); color: var(--ink);
+}
+.mccm-list-ui { max-width: 1400px; margin: 0 auto; padding: 8px 20px 40px; font-size: 13px; }
+.mccm-list-ui *, .mccm-pop *, .mccm-pop *::before, .mccm-pop *::after { box-sizing: border-box; }
+
+/* heading */
+.mccm-list-ui .mccm-crumb { margin: 22px 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.mccm-list-ui h1.mccm-title { font-family: var(--f-head); font-weight: 700; font-size: 38px; line-height: 1.1; color: var(--teal-deep); margin: 0 0 8px; padding: 0; }
+.mccm-list-ui .mccm-count { margin: 0 0 18px; font-size: 15px; color: var(--ink-2); }
+
+/* saved banner */
+.mccm-list-ui .mccm-flash { margin: 0 0 16px; border: 1px solid var(--line); border-left: 4px solid var(--leaf); border-radius: var(--r-card); background: #fff; box-shadow: none; }
+.mccm-list-ui .mccm-flash a { color: var(--link); font-weight: 700; }
+
+/* toolbar card: search + add */
+.mccm-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 16px 20px; margin: 0 0 16px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: 0 1px 2px color-mix(in srgb, var(--mccm-ink) 4%, transparent); }
+.mccm-toolbar .search-box { display: flex; flex: 1 1 380px; gap: 10px; float: none; margin: 0; position: static; width: auto; }
+.mccm-toolbar .search-box input[type=search] { flex: 1; width: auto; height: 38px; margin: 0; padding: 0 12px; border: 1px solid var(--field-line); border-radius: var(--r-field); font-size: 13.5px; font-family: var(--f-body); color: var(--ink); box-shadow: none; }
+.mccm-toolbar .search-box input[type=search]:focus { outline: none; border-color: var(--teal-deep); box-shadow: 0 0 0 3px var(--ring); }
+.mccm-list-ui .button { height: 38px; line-height: 36px; padding: 0 16px; margin: 0; border-radius: var(--r-field); border: 1px solid var(--btn-line); background: var(--btn-bg); color: var(--ink); font-family: var(--f-body); font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; box-shadow: none; text-shadow: none; }
+.mccm-list-ui .button:hover, .mccm-list-ui .button.button-primary:hover { background: var(--btn-hover); border-color: var(--teal-deep); color: var(--ink); }
+.mccm-list-ui .button.button-primary { background: var(--btn-bg); border-color: var(--btn-line); color: var(--ink); }
+.mccm-list-ui .button:focus-visible, .mccm-pop .button:focus-visible { outline: 2px solid var(--teal-deep); outline-offset: 2px; box-shadow: none; }
+.mccm-toolbar .mccm-add { text-decoration: none; display: inline-block; }
+.mccm-toolbar .mccm-tip { flex: 0 0 100%; margin: 0; font-size: 12.5px; color: var(--ink-3); }
+
+/* paging */
+.mccm-list-ui .tablenav { height: auto; margin: 0 0 10px; padding: 0; }
+.mccm-list-ui .tablenav .displaying-num { font-size: 13px; color: var(--ink-2); }
+.mccm-list-ui .tablenav-pages .button, .mccm-list-ui .tablenav-pages .tablenav-pages-navspan { height: 36px; min-width: 36px; line-height: 34px; padding: 0 10px; border-radius: var(--r-field); font-size: 16px; }
+.mccm-list-ui .tablenav-pages input.current-page { height: 36px; border: 1px solid var(--field-line); border-radius: var(--r-field); }
+
+/* table card */
+.mccm-list-ui .wp-list-table { border: 1px solid var(--line); border-radius: var(--r-card); border-collapse: separate; border-spacing: 0; overflow: hidden; background: #fff; box-shadow: 0 1px 2px color-mix(in srgb, var(--mccm-ink) 4%, transparent); }
+.mccm-list-ui .wp-list-table tfoot { display: none; }
+.mccm-list-ui .wp-list-table thead th { padding: 11px 10px; background: #fff; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 700; color: var(--ink-2); }
+.mccm-list-ui .wp-list-table thead th a { color: var(--link); padding: 0; }
+.mccm-list-ui .wp-list-table thead th.sorted a, .mccm-list-ui .wp-list-table thead th a:hover { color: var(--ink); }
+.mccm-list-ui .wp-list-table tbody tr { background: #fff; }
+.mccm-list-ui .wp-list-table.striped > tbody > :nth-child(odd) { background: var(--stripe); }
+.mccm-list-ui .wp-list-table tbody tr:hover, .mccm-list-ui .wp-list-table.striped > tbody > tr:hover { background: var(--row-hover); }
+.mccm-list-ui .wp-list-table td { padding: 9px 10px; vertical-align: top; font-size: 14px; line-height: 1.4; color: var(--ink); }
+.mccm-list-ui .wp-list-table tbody tr:last-child td { border-bottom: 0 !important; }
+.mccm-list-ui .wp-list-table th:first-child, .mccm-list-ui .wp-list-table td:first-child { padding-left: 20px; }
+.mccm-list-ui .wp-list-table th:last-child, .mccm-list-ui .wp-list-table td:last-child { padding-right: 20px; }
+.mccm-list-ui .wp-list-table { table-layout: auto; }
+.mccm-list-ui .wp-list-table th.column-UID, .mccm-list-ui .wp-list-table td.column-UID { width: 215px; min-width: 150px; font-weight: 600; color: var(--ink-2); }
+.mccm-list-ui .column-INTERMENT { min-width: 70px; }
+.mccm-list-ui .column-BIRTH, .mccm-list-ui .column-DEATH, .mccm-list-ui .column-INTERMENT, .mccm-list-ui .column-SPACE { white-space: nowrap; }
+.mccm-list-ui .column-BIRTH, .mccm-list-ui .column-DEATH { min-width: 100px; }
+.mccm-list-ui .column-LAST, .mccm-list-ui .column-FIRST { min-width: 120px; }
+.mccm-list-ui .column-CEMETERY { min-width: 70px; }
+.mccm-list-ui .column-LAST { font-weight: 700; }
+.mccm-list-ui .column-CONTACT_STREET1 { min-width: 200px; color: var(--ink-2); }
+
+/* row links (WordPress style): shown on row hover or keyboard focus, always on touch and narrow screens */
+.mccm-list-ui .row-actions { position: static; left: auto; margin-top: 4px; padding: 0; font-size: 12.5px; font-weight: 400; color: var(--ink-3); opacity: 0; transition: opacity .12s; }
+.mccm-list-ui tr:hover .row-actions, .mccm-list-ui tr:focus-within .row-actions { opacity: 1; }
+@media (hover: none), (max-width: 782px) {
+  .mccm-list-ui .wp-list-table .column-primary .row-actions { display: block; opacity: 1; color: var(--ink-3); font-size: 12.5px; }
+  .mccm-list-ui .wp-list-table .column-primary .row-actions span { display: inline; width: auto; font-size: 12.5px; }
+}
+.mccm-list-ui .row-actions a, .mccm-int { color: var(--link); font: inherit; font-weight: 600; text-decoration: none; background: none; border: 0; padding: 0; height: auto; display: inline; cursor: pointer; }
+.mccm-list-ui .row-actions a:hover, .mccm-int:hover { text-decoration: underline; }
+.mccm-list-ui .row-actions a:focus-visible, .mccm-int:focus-visible { outline: 2px solid var(--teal-deep); outline-offset: 2px; }
+.mccm-list-ui .row-actions .edit a { color: #2f6f9f; }
+.mccm-list-ui .row-actions .delete a { color: var(--err); }
+
+/* details panel: native popover, centred, scrolls inside, closes with Esc / click outside / the cross */
+.mccm-pop { display: none; }
+@supports selector(:popover-open) {
+  .mccm-pop:popover-open { display: flex; flex-direction: column; position: fixed; inset: 0; margin: auto; width: min(920px, calc(100vw - 32px)); height: fit-content; max-height: min(86vh, 900px); padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-card); background: #fff; color: var(--ink); box-shadow: 0 24px 60px -12px color-mix(in srgb, var(--mccm-ink) 45%, transparent); }
+  .mccm-pop::backdrop { background: color-mix(in srgb, var(--mccm-ink) 45%, transparent); }
+}
+.mccm-pop-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 22px 24px 16px; border-bottom: 1px solid var(--line-2); }
+.mccm-pop-kicker { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.mccm-pop-head h2 { margin: 0; padding: 0; font-family: var(--f-head); font-size: 30px; line-height: 1.15; font-weight: 700; color: var(--teal-deep); }
+.mccm-pop-x { flex: none; width: 40px; height: 40px; margin: -6px -8px 0 0; border: 0; border-radius: var(--r-field); background: none; color: var(--ink-2); font-size: 28px; line-height: 1; cursor: pointer; }
+.mccm-pop-x:hover { background: var(--mint); color: var(--ink); }
+.mccm-pop-body { padding: 8px 24px 8px; overflow-y: auto; }
+.mccm-pop-sec { padding: 16px 0; border-bottom: 1px solid var(--line-2); }
+.mccm-pop-sec:last-child { border-bottom: 0; }
+.mccm-pop-sec h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; padding: 0; font-family: var(--f-head); font-size: 18px; font-weight: 700; color: var(--ink); }
+.mccm-pop-sec h3 .mccm-ico { width: 20px; height: 20px; color: var(--teal-deep); }
+.mccm-pop-sec dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px 20px; margin: 0; }
+.mccm-pop-sec dl div { margin: 0; min-width: 0; }
+.mccm-pop-sec dt { margin: 0 0 2px; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.mccm-pop-sec dd { margin: 0; font-size: 15px; color: var(--ink); overflow-wrap: anywhere; }
+.mccm-pop-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px; border-top: 1px solid var(--line-2); background: color-mix(in srgb, var(--mccm-page) 25%, #fff); font-size: 13px; color: var(--ink-2); }
+.mccm-pop .button { height: 40px; line-height: 38px; padding: 0 18px; border-radius: var(--r-field); border: 1px solid var(--btn-line); background: var(--btn-bg); color: var(--ink); font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; box-shadow: none; text-decoration: none; }
+.mccm-pop .button:hover, .mccm-pop .button.button-primary:hover { background: var(--btn-hover); border-color: var(--teal-deep); color: var(--ink); }
+
+/* tablets and phones: WordPress already stacks the table rows under 783px; tidy the rest */
+@media (max-width: 782px) {
+  .mccm-list-ui { padding: 8px 12px 32px; }
+  .mccm-list-ui h1.mccm-title { font-size: 34px; }
+  .mccm-toolbar { padding: 14px; }
+  .mccm-toolbar .search-box { flex-basis: 100%; }
+  .mccm-toolbar .mccm-add { flex: 1 1 100%; text-align: center; }
+  .mccm-list-ui .wp-list-table { border-radius: var(--r-card); }
+  .mccm-list-ui .wp-list-table td { padding: 8px 12px; }
+
+  /* WordPress hides all but the first column on phones; show every filled cell with its label instead */
+  .mccm-list-ui .wp-list-table tr:not(.inline-edit-row):not(.no-items) td:not(.column-primary)::before { display: block; position: static; width: auto; margin: 0 0 2px; padding: 0; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); content: attr(data-colname); }
+  .mccm-list-ui .wp-list-table tr:not(.inline-edit-row):not(.no-items) td:not(.column-primary) { display: block !important; float: none !important; width: auto !important; padding: 6px 12px !important; text-align: left; }
+  .mccm-list-ui .wp-list-table tr:not(.inline-edit-row):not(.no-items) td:not(.column-primary):empty { display: none !important; }
+  .mccm-list-ui .wp-list-table .toggle-row { display: none; }
+  .mccm-list-ui .wp-list-table td.column-INTERMENT { position: static !important; clear: both; margin: 0 !important; border-bottom: 0; }
+  .mccm-list-ui .wp-list-table .column-primary { display: block; padding: 12px 12px 6px; }
+  .mccm-list-ui .wp-list-table tbody tr { padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .mccm-list-ui .wp-list-table tbody tr:last-child { border-bottom: 0; }
+  .mccm-pop-head { padding: 16px; }
+  .mccm-pop-head h2 { font-size: 24px; }
+  .mccm-pop-body { padding: 4px 16px; }
+  .mccm-pop-sec dl { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mccm-pop-foot { padding: 12px 16px; }
+}
+@media (max-width: 420px) { .mccm-pop-sec dl { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .mccm-int, .mccm-pop * { transition: none; } }
+
+.mccm-pop-wait { padding: 28px 8px; color: var(--ink-2); }
+
+/* ===== 5. import screen ===== */
+.mccm-howto { margin: 0; padding: 20px 26px 4px 48px; font-size: 15px; line-height: 1.55; color: var(--ink); }
+.mccm-howto li { margin: 0 0 10px; padding-left: 6px; }
+.mccm-rules { margin: 8px 26px 26px; padding: 16px 20px; border-radius: var(--r-field); background: color-mix(in srgb, var(--mint) 45%, #fff); border: 1px solid var(--line-2); }
+.mccm-ui .mccm-rules h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-deep); }
+.mccm-rules ul { margin: 0; padding-left: 18px; list-style: disc; font-size: 14px; line-height: 1.55; }
+.mccm-rules li { margin: 0 0 5px; }
+.mccm-rules li.is-danger { color: var(--err); }
+
+.mccm-imp .mccm-card-head h2 { font-size: 28px; }
+.mccm-steps { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.mccm-steps > li { padding: 22px 26px; border-bottom: 1px solid var(--line-2); }
+.mccm-steps > li:last-child { border-bottom: 0; }
+.mccm-ui .mccm-steps h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 17px; font-weight: 700; color: var(--ink); }
+.mccm-steps h3 b { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--mint); color: var(--ink); font-size: 14px; }
+.mccm-steps p { margin: 5px 0 10px; }
+.mccm-steps .mccm-btn .mccm-ico { width: 18px; height: 18px; }
+
+.mccm-ui input[type=file] { display: block; width: 100%; padding: 9px; border: 1px dashed var(--field-line); border-radius: var(--r-field); background: #fff; font-family: var(--f-body); }
+.mccm-ui input[type=file]::file-selector-button { height: 30px; margin-right: 12px; padding: 0 14px; border: 1px solid var(--btn-line); border-radius: 6px; background: var(--btn-bg); color: var(--ink); font-weight: 700; cursor: pointer; }
+.mccm-ui input[type=file]::file-selector-button:hover { background: var(--btn-hover); }
+.mccm-ui .mccm-field input[type=number] { max-width: 120px; }
+
+.mccm-modes { display: grid; gap: 10px; }
+.mccm-mode { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1px solid var(--field-line); border-radius: var(--r-field); background: #fff; cursor: pointer; }
+.mccm-mode:hover { border-color: var(--teal-deep); }
+.mccm-mode:has(input:checked) { border-color: var(--teal-deep); background: color-mix(in srgb, var(--mint) 40%, #fff); box-shadow: 0 0 0 3px var(--ring); }
+.mccm-mode.is-danger:has(input:checked) { border-color: var(--err); background: var(--err-bg); box-shadow: 0 0 0 3px color-mix(in srgb, var(--err) 18%, transparent); }
+.mccm-mode input { margin: 3px 0 0; flex: none; }
+.mccm-mode span { display: block; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.mccm-mode b { display: block; font-size: 15px; color: var(--ink); }
+.mccm-mode.is-danger b { color: var(--err); }
+
+.mccm-switch { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: var(--ink-2); cursor: pointer; }
+.mccm-switch input { margin-top: 3px; flex: none; }
+.mccm-switch b { color: var(--ink); }
+
+
+.mccm-imp-foot { padding: 18px 26px 24px; border-top: 1px solid var(--line-2); }
+
+/* report */
+.mccm-report { padding: 20px 26px; font-size: 14px; line-height: 1.6; }
+.mccm-log { max-height: 380px; overflow: auto; margin-top: 12px; padding: 12px 14px; border: 1px solid var(--line-2); border-radius: var(--r-field); background: color-mix(in srgb, var(--sage) 35%, #fff); font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; word-break: break-word; }
+.mccm-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0; padding: 20px 26px; }
+.mccm-stats > div { padding: 14px 16px; border: 1px solid var(--line-2); border-radius: var(--r-field); background: #fff; }
+.mccm-stats > div.is-warn { border-color: var(--err-line); background: var(--err-bg); }
+.mccm-stats dt { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.mccm-stats dd { margin: 4px 0 0; font-family: var(--f-head); font-size: 30px; font-weight: 700; color: var(--ink); }
+.mccm-stats-note { margin: 0; padding: 0 26px 20px; color: var(--ink-2); font-size: 14px; }
+
+@media (max-width: 782px) {
+  .mccm-howto { padding-left: 38px; padding-right: 18px; }
+  .mccm-rules { margin: 8px 18px 20px; }
+  .mccm-steps > li, .mccm-imp-foot, .mccm-report, .mccm-stats { padding-left: 18px; padding-right: 18px; }
+}
+
+/* import: columns button, required star, side panel, problems table */
+.mccm-cols summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 58px; padding: 10px 18px; border: 1px solid var(--btn-line); border-radius: var(--r-field); background: #fff; color: var(--ink); cursor: pointer; list-style: none; }
+.mccm-cols summary .main { display: block; font-size: 16px; font-weight: 700; }
+.mccm-cols summary .short { display: block; margin-top: 2px; font-size: 14px; font-weight: 400; color: var(--ink-2); }
+.mccm-cols summary::-webkit-details-marker { display: none; }
+.mccm-cols summary::after { content: ""; width: 8px; height: 8px; margin-left: 4px; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(45deg) translateY(-2px); transition: transform .15s; }
+.mccm-cols[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+.mccm-cols summary:hover { background: var(--btn-hover); border-color: var(--teal-deep); }
+.mccm-cols ol { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px 16px; margin: 14px 0 0; padding: 0; list-style: none; counter-reset: c; }
+.mccm-cols li { counter-increment: c; font-size: 15px; color: var(--ink); }
+.mccm-cols li::before { content: counter(c) ". "; color: var(--ink-3); }
+.mccm-cols li.is-req::after { content: " *"; color: var(--err); font-weight: 700; }
+.mccm-steps .mccm-hint b { color: var(--err); }
+
+.mccm-imp-layout { display: grid; gap: 22px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+.mccm-imp-side .mccm-card { margin-bottom: 0; }
+@media (min-width: 1024px) {
+  .mccm-imp-layout { grid-template-columns: minmax(0, 1fr) clamp(320px, 28vw, 510px); }
+  .mccm-imp-side { grid-column: 2; grid-row: 1; position: sticky; top: 50px; max-height: calc(100vh - 70px); overflow: auto; }
+  .mccm-imp-main { grid-column: 1; grid-row: 1; }
+  .mccm-imp-side .mccm-howto { padding: 18px 22px 0 44px; font-size: 15px; }
+  .mccm-imp-side .mccm-rules ul { font-size: 15px; }
+  .mccm-imp-side .mccm-rules { margin: 8px 18px 18px; }
+}
+
+.mccm-table { width: calc(100% - 52px); margin: 0 26px 20px; border-collapse: collapse; font-size: 14px; }
+.mccm-table th, .mccm-table td { padding: 9px 12px; border-bottom: 1px solid var(--line-2); text-align: left; vertical-align: top; }
+.mccm-table th { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.mccm-table td:first-child { width: 70px; color: var(--ink-2); }
+.mccm-more { margin: 0 26px 20px; }
+.mccm-more summary { cursor: pointer; font-weight: 700; color: var(--link); }
+.mccm-more .mccm-table { width: 100%; margin: 8px 0 0; }
+
+.mccm-steps .mccm-btn, .mccm-imp-foot .mccm-btn { width: 100%; }
+
+/* export screen */
+.mccm-exp-facts { margin: 0; padding: 18px 26px 4px; color: var(--ink-2); font-size: 14px; }
+.mccm-exp-facts b { color: var(--ink); }
+.mccm-rules a, .mccm-howto a { color: var(--link); font-weight: 700; }
+
+/* reports: two buttons side by side */
+.mccm-imp-foot.mccm-rep-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.mccm-imp-foot.mccm-rep-btns .mccm-btn { width: auto; flex: 1 1 200px; }
