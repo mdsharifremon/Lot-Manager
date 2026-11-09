@@ -4,7 +4,7 @@
 
 **Cemetery burial records for WordPress: manage, import, export, report, and let families find a grave online.**
 
-![Version](https://img.shields.io/badge/version-2.0.0-2f6f5f)
+![Version](https://img.shields.io/badge/version-3.0.0-2f6f5f)
 ![PHP](https://img.shields.io/badge/PHP-7.4%20to%208.5-777bb4)
 ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b)
 ![License](https://img.shields.io/badge/license-GPL--2.0--only-blue)
@@ -115,4 +115,4 @@ Before release the plugin was checked against a copy of the real data:
 - Original plugin: Meridian Consulting, Inc. (2011)
 - Rewrite and maintenance: [MD Sharif](https://sharifu.com) (2026)
 - Fonts: Lato and Lora, SIL Open Font License (`assets/fonts/OFL.txt`)
-- License: GPL-2.0-only, as stated in the plugin header
+- License: GPL-2.0-only (see `LICENSE`)
