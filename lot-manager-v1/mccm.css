@@ -1,0 +1,33 @@
+div.mccmedit {
+   float:left;
+   padding:30px;
+}
+
+.mccmedit label, .mccmedit input {
+            margin: 7px;
+            padding: 2px;
+        }
+
+.mccm_interment {position:relative;}
+
+.mccmextra {
+   position:fixed;
+   border:1px solid black;
+   background:white;
+   z-index:1;
+   padding:10px;
+   margin-left:50px;
+   display:none;
+   top:50px;
+   }
+
+   td.eilabel{font-weight:bold}
+#woeditformfs,.mccmfs {border:1px solid black; display:inline-block;padding:10px;line-height:3em}
+#woeditformfs legend h3 {margin:0;padding:0;}
+#woeditformfs label {font-weight:bold}
+   .wotable {border-collapse:collapse;min-width:75%;margin:0 auto;}
+   .wotable td{border:1px solid black;padding:10px 20px;}
+
+   th#UID {
+       width: 160px;
+   }
