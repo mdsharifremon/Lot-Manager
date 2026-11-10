@@ -45,7 +45,7 @@ It is a rewrite of the original *Meridian Consulting* Lot Manager (2011), rebuil
 3. On a new site the records table is created automatically. If the table already exists it is left untouched.
 4. Put `[mccm]` on the page where visitors should search.
 
-> Deactivating or deleting the plugin never removes your data.
+> This plugin is the site's main data store. Do not deactivate it: the records disappear from the website and the dashboard until it is active again. Deactivating shows a warning. Deactivating or deleting never removes your data.
 
 ## Using it
 
@@ -93,6 +93,7 @@ lot-manager-v3/
 ├── includes/                Shared code: helpers, install, assets, list table
 ├── admin/
 │   ├── menu.php, ajax.php, list-view.php
+│   ├── plugin-screen.php    Deactivate warning on the Plugins screen
 │   ├── form/                data, validate, save, render
 │   └── screens/             records, import, export, reports
 ├── public/shortcodes.php    [mccm] grave locator

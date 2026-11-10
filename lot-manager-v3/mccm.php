@@ -2,12 +2,13 @@
 /**
  * Plugin Name: Wyuka Cemetery Manager
  * Plugin URI: https://sharifu.com
- * Description: Lot Manager for Wyuka: burial records, reports, import and export, and the public grave locator.
+ * Description: MAIN DATA STORE of the Wyuka site. Burial records, reports, import and export, and the public grave locator. Do not deactivate: the site will not run as expected and the records will not show on the website or in the dashboard.
  * Version: 3.0.0
  * Requires PHP: 7.4
  * Requires at least: 6.0
  * Author: MD Sharif
  * Author URI: https://sharifu.com
+ * Update URI: false
  * License: GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: mccm
@@ -43,6 +44,7 @@ require_once MCCM_PLUGIN_DIR . 'includes/install.php';
 require_once MCCM_PLUGIN_DIR . 'includes/assets.php';
 require_once MCCM_PLUGIN_DIR . 'admin/menu.php';
 require_once MCCM_PLUGIN_DIR . 'admin/ajax.php';
+require_once MCCM_PLUGIN_DIR . 'admin/plugin-screen.php';
 require_once MCCM_PLUGIN_DIR . 'admin/list-view.php';
 require_once MCCM_PLUGIN_DIR . 'admin/form/data.php';
 require_once MCCM_PLUGIN_DIR . 'admin/form/validate.php';
