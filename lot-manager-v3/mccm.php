@@ -2,12 +2,12 @@
 /**
  * Plugin Name: Wyuka Cemetery Manager
  * Plugin URI: https://sharifu.com
- * Description: MAIN DATA STORE of the Wyuka site. Burial records, reports, import and export, and the public grave locator. Do not deactivate: the site will not run as expected and the records will not show on the website or in the dashboard.
+ * Description:  Description: Burial records, reports, import and export, and the public grave locator. <strong>Main data store of the site. Do not deactivate: the records will not show on the website or in the dashboard.</strong>
  * Version: 3.0.0
- * Requires PHP: 7.4
- * Requires at least: 6.0
- * Author: MD Sharif
- * Author URI: https://sharifu.com
+ * Requires PHP: 8.2
+ * Requires at least: 6.8
+ * Author: Sharif
+ * Author URI: mailto:sharifwds@gmail.com
  * Update URI: false
  * License: GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -15,7 +15,7 @@
  */
 /**
  * Copyright 2011 Meridian Consulting, Inc. (original plugin)
- * Copyright 2026 MD Sharif (https://sharifu.com) (restructured and rewritten portions)
+ * Copyright 2026 MD Sharif (https://sharifu.com) (restructured and rewritten)
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
  * published by the Free Software Foundation.
