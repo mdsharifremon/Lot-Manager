@@ -21,8 +21,9 @@ function mccm_show_val($v) {
     return trim(stripslashes((string) $v));
 }
 
-/** Delete link text names the record, so nobody deletes the wrong one. */
+/** Delete link attributes for the confirm box; the text names the record, so nobody deletes the wrong one. */
 function mccm_delete_confirm($item) {
     $who = trim(mccm_show_val($item['LAST'] ?? '') . ', ' . mccm_show_val($item['FIRST'] ?? ''), ' ,');
-    return esc_attr('return confirm(' . wp_json_encode('Delete record ' . (int) $item['UID'] . ($who !== '' ? ' (' . $who . ')' : '') . '? This cannot be undone.') . ');');
+    $msg = 'Record ' . (int) $item['UID'] . ($who !== '' ? ' (' . $who . ')' : '') . ' will be removed. This cannot be undone.';
+    return 'data-mccm-title="Delete this record?" data-mccm-confirm="' . esc_attr($msg) . '" data-mccm-btn="Delete record" data-mccm-danger="1"';
 }

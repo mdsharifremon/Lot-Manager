@@ -6,13 +6,22 @@
  */
 if (!defined('ABSPATH')) exit;
 
+/** Shared confirm box (own css + js). Used on our screens and on the Plugins screen. */
+function mccm_confirm_assets() {
+    $css = 'assets/admin/css/confirm.css';
+    $js  = 'assets/admin/js/confirm.js';
+    wp_enqueue_style('mccm-confirm', MCCM_PLUGIN_URL . $css, array(), (string) @filemtime(MCCM_PLUGIN_DIR . $css));
+    wp_enqueue_script('mccm-confirm', MCCM_PLUGIN_URL . $js, array(), (string) @filemtime(MCCM_PLUGIN_DIR . $js), true);
+}
+
 add_action('admin_enqueue_scripts', 'mccm_admin_assets');
 function mccm_admin_assets() {
     if (strpos((string) ($_GET['page'] ?? ''), 'mccm') !== 0) return;
     $css = 'assets/admin/css/admin.css';
     $js  = 'assets/admin/js/admin.js';
-    wp_enqueue_style('mccm-admin', MCCM_PLUGIN_URL . $css, array(), (string) @filemtime(MCCM_PLUGIN_DIR . $css));
-    wp_enqueue_script('mccm-admin', MCCM_PLUGIN_URL . $js, array('jquery'), (string) @filemtime(MCCM_PLUGIN_DIR . $js), true);
+    mccm_confirm_assets();
+    wp_enqueue_style('mccm-admin', MCCM_PLUGIN_URL . $css, array('mccm-confirm'), (string) @filemtime(MCCM_PLUGIN_DIR . $css));
+    wp_enqueue_script('mccm-admin', MCCM_PLUGIN_URL . $js, array('jquery', 'mccm-confirm'), (string) @filemtime(MCCM_PLUGIN_DIR . $js), true);
 }
 
 /* Front end: enqueue at the moment a shortcode of ours renders (works for themes, widgets and page builders). */

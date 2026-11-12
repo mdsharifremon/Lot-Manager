@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Wyuka Cemetery Manager
- * Plugin URI: https://sharifu.com
- * Description:  Description: Burial records, reports, import and export, and the public grave locator. <strong>Main data store of the site. Do not deactivate: the records will not show on the website or in the dashboard.</strong>
+ * Plugin URI: https://github.com/mdsharifremon/Lot-Manager
+ * Description: Burial records, reports, import and export, and the public grave locator. <strong>Main data store of the site. Do not deactivate: the records will not show on the website or in the dashboard.</strong>
  * Version: 3.0.0
  * Requires PHP: 8.2
  * Requires at least: 6.8
  * Author: Sharif
- * Author URI: mailto:sharifwds@gmail.com
+ * Author URI: https://sharifu.com
  * Update URI: false
  * License: GPL-2.0-only
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html

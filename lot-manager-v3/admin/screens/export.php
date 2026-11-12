@@ -131,7 +131,7 @@ function mccm_screen_export() {
         $del = wp_nonce_url(admin_url('admin-post.php?action=mccm_export_cleanup'), 'mccm_export_cleanup');
         echo '<section class="mccm-card mccm-imp"><header class="mccm-card-head"><span class="mccm-card-ico">' . mccm_icon('alert') . '</span><div><h2>Old export files</h2><p>Left on the server by an earlier version of this plugin.</p></div></header>';
         echo '<p class="mccm-exp-facts"><b>' . count($old) . '</b> file(s) &middot; <b>' . esc_html(size_format($size)) . '</b>. They are no longer needed.</p>';
-        echo '<div class="mccm-imp-foot"><a class="mccm-btn mccm-btn-soft mccm-imp-go" href="' . esc_url($del) . '" onclick="return confirm(\'Delete these old export files? This cannot be undone.\');">' . mccm_icon('alert') . '<span>Delete old export files</span></a></div></section>';
+        echo '<div class="mccm-imp-foot"><a class="mccm-btn mccm-btn-soft mccm-imp-go" href="' . esc_url($del) . '" data-mccm-title="Delete old export files?" data-mccm-confirm="This cannot be undone." data-mccm-btn="Delete files" data-mccm-danger="1">' . mccm_icon('alert') . '<span>Delete old export files</span></a></div></section>';
     }
     echo '</div></div></div>';
 }

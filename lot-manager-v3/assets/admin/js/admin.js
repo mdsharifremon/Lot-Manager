@@ -141,8 +141,14 @@ document.querySelectorAll('.mccm-imp-form').forEach(function (f) {
     function sync() { l.textContent = t.checked ? l.dataset.test : l.dataset.live; }
     t.addEventListener('change', sync); sync();
     f.addEventListener('submit', function (e) {
-        if (!t.checked) {
-            if (!confirm('This changes your data permanently. Did you run a test first? Continue?')) return e.preventDefault();
+        if (!t.checked && !f.dataset.ok) {
+            e.preventDefault();
+            mccmConfirm({
+                title: 'Run the real import?',
+                message: 'This changes your data permanently. Did you run a test first?',
+                button: 'Yes, import', danger: true
+            }, function () { f.dataset.ok = '1'; f.requestSubmit(); });
+            return;
         }
         setTimeout(function () { b.disabled = true; }, 0);
     });

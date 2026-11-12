@@ -37,7 +37,7 @@ class MCCM_List_Table extends WP_List_Table {
         $actions = array(
             'view' => mccm_row_details($item), // opens the details panel
             'edit' => sprintf('<a href="?page=%s&action=%s&id=%d">Edit</a>', $pg, 'edit', (int) $item['UID']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&id=%d&_wpnonce=%s" onclick="%s">Delete</a>', $pg, 'delete', (int) $item['UID'], wp_create_nonce('mccm_delete_'.$item['UID']), mccm_delete_confirm($item)),
+            'delete' => sprintf('<a href="?page=%s&action=%s&id=%d&_wpnonce=%s" %s>Delete</a>', $pg, 'delete', (int) $item['UID'], wp_create_nonce('mccm_delete_'.$item['UID']), mccm_delete_confirm($item)),
         );
         return (int) $item['UID'] . $this->row_actions($actions); // WordPress style: ID always shown, links appear on hover (CSS)
     }

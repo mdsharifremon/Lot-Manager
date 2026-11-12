@@ -1,0 +1,34 @@
+/* Shared confirm box (Lot Manager screens and the Plugins screen). */
+.mccm-dlg {
+  width: min(440px, calc(100vw - 32px));
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: #fff;
+  color: #404244;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+  font: 14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.mccm-dlg::backdrop { background: rgba(30, 35, 40, .55); }
+.mccm-dlg form { margin: 0; padding: 24px 24px 20px; }
+.mccm-dlg-t { margin: 0 0 8px; padding: 0; font-size: 18px; line-height: 1.3; color: inherit; }
+.mccm-dlg-m { margin: 0 0 22px; white-space: pre-line; color: #5c5e60; }
+.mccm-dlg-b { display: flex; justify-content: flex-end; gap: 10px; }
+.mccm-dlg button {
+  min-height: 38px;
+  padding: 0 18px;
+  border: 1px solid #c9ccc4;
+  border-radius: 6px;
+  background: #fff;
+  color: inherit;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.mccm-dlg button:hover { background: #f3f4f1; }
+.mccm-dlg button:focus-visible { outline: 2px solid #70a7a8; outline-offset: 2px; }
+.mccm-dlg-yes { background: #c9e7d7; border-color: #a9cfbb; }
+.mccm-dlg-yes:hover { background: #bfe0cd; }
+.mccm-dlg.is-danger .mccm-dlg-yes { background: #b3261e; border-color: #b3261e; color: #fff; }
+.mccm-dlg.is-danger .mccm-dlg-yes:hover { background: #9a1f18; }
